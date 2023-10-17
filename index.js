@@ -1,5 +1,7 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
+// Pulling Deconstructed Class of Shapes from shapes.js
+const {Triangle, Circle, Square} = require('../lib/shapes');
 
 inquirer
   .prompt([
@@ -25,4 +27,6 @@ inquirer
       },
   
   ])
-    
+
+//   Need to figure out how to pass colors and texts thru shapes
+// Parse Data?
