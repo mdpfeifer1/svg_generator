@@ -1,7 +1,9 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 // Pulling Deconstructed Class of Shapes from shapes.js
-const {Triangle, Circle, Square} = require('../lib/shapes');
+const { Triangle, Circle, Square } = require("./lib/shapes");
+
+// Class with a child constructor using .this to target element
 
 inquirer
   .prompt([
@@ -12,21 +14,38 @@ inquirer
     },
     {
       type: "input",
-      name: "text color",
+      name: "textColor",
       message: "Select a Color.",
     },
     {
-      type: "input",
+      type: "list",
       name: "shape",
       message: "What Shape Would You Like to Use?",
+      choices: ["circle", "triangle", "square"],
     },
     {
-        type: "input",
-        name: "shape color",
-        message: "What Color Would You Like Your Shape?",
-      },
-  
+      type: "input",
+      name: "shapeColor",
+      message: "What Color Would You Like Your Shape?",
+    },
   ])
+  .then((answers) => {
+    let choice;
+    if (answers.shape === "circle") {
+      choice = new Circle(answers.title, answers.textColor, answers.shapeColor);
+    } else if(answers.shape === "square") {
+      choice = new Square(answers.title, answers.textColor, answers.shapeColor);  
+    } else{
+        
+        choice = new Triangle(answers.title, answers.textColor, answers.shapeColor);
+    }
 
-//   Need to figure out how to pass colors and texts thru shapes
-// Parse Data?
+    fs.writeFile("logo.svg", choice.render(), function (err) {
+      if (err) {
+        return console.log(err);
+      }
+      
+    });
+  });
+
+
