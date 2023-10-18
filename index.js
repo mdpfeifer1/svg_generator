@@ -33,19 +33,19 @@ inquirer
     let choice;
     if (answers.shape === "circle") {
       choice = new Circle(answers.title, answers.textColor, answers.shapeColor);
-    } else if(answers.shape === "square") {
-      choice = new Square(answers.title, answers.textColor, answers.shapeColor);  
-    } else{
-        
-        choice = new Triangle(answers.title, answers.textColor, answers.shapeColor);
+    } else if (answers.shape === "square") {
+      choice = new Square(answers.title, answers.textColor, answers.shapeColor);
+    } else {
+      choice = new Triangle(
+        answers.title,
+        answers.textColor,
+        answers.shapeColor
+      );
     }
 
     fs.writeFile("logo.svg", choice.render(), function (err) {
       if (err) {
         return console.log(err);
       }
-      
     });
   });
-
-
